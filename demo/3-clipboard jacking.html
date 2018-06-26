@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>剪切板信息获取</h1>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        // 1. window.getSelection().toString() 获取选中文字
+        // $("h1").on('copy', function (e) {
+        //     var self = this;
+        //     console.log(window.getSelection().toString())
+        // })
+
+        // 2. 修改复制的文字
+        // const addCopyright = () => {
+        //     // 初始插入文本
+        //     const genCopy = (author, url, description) => {
+        //         return [
+        //             '',
+        //             '',
+        //             '作者：' + author || '测试',
+        //             '链接：' + url || '测试',
+        //             description || '测试文档\n\n',
+        //         ]
+        //     }
+        //     // 绑定copy事件，绑定的元素和author/link/description都可以通过参数向外暴露
+        //     $('body').on('copy', function (event) {
+        //         if (!window.getSelection) {
+        //             return
+        //         }
+
+        //         // selection对象用于获取选中文字
+        //         var selectionObj = window.getSelection()
+        //         var author = $(this).data('author') || '测试'
+        //         var link = $(this).data('link') || location.href
+        //         var description = `哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈\n\n`
+
+        //         // 文字判定长度
+        //         if (selectionObj.toString().length < 2) {
+        //             return
+        //         }
+
+        //         if (selectionObj.rangeCount) {
+        //             var container = document.createElement("div");
+        //             for (var i = 0, len = selectionObj.rangeCount; i < len; ++i) {
+        //                 container.appendChild(selectionObj.getRangeAt(i).cloneContents());
+        //             }
+        //         }
+
+        //         if ('object' === typeof event.originalEvent.clipboardData) {
+        //             // 拼接&插入信息
+        //             event.originalEvent.clipboardData.setData('text/html', container.innerHTML + genCopy(
+        //                 author, link, description).join('<br>'))
+        //             container.remove();
+        //             event.originalEvent.clipboardData.setData('text/plain', selectionObj.toString() +
+        //                 genCopy(author, link, description).join('\n'))
+        //             event.preventDefault();
+        //             return
+        //         }
+
+        //         $('body').append('<div id="symFixCopy" style="position: fixed; left: -9999px;">' +
+        //             selectionObj.toString() + genCopy(author, link).join('<br>') + '</div>')
+        //         window.getSelection().selectAllChildren($('#symFixCopy')[0])
+        //         setTimeout(function () {
+        //             $('#symFixCopy').remove()
+        //         }, 200)
+
+
+        //     })
+        // }
+
+        // addCopyright()
+
+        // 3. 清空selection，实现屏蔽复制功能
+        const addCopyfalse = () => {
+            // 绑定copy事件，绑定的元素和author/link/description都可以通过参数向外暴露
+            $('body').on('copy', function (event) {
+                if (!window.getSelection) {
+                    return
+                }
+
+                // selection对象用于获取选中文字
+                var selectionObj = window.getSelection()
+
+                // 文字判定长度
+                if (selectionObj.toString().length < 2) {
+                    return
+                }
+
+                if (selectionObj.rangeCount) {
+                    var container = document.createElement("div");
+                    for (var i = 0, len = selectionObj.rangeCount; i < len; ++i) {
+                        container.appendChild(selectionObj.getRangeAt(i).cloneContents());
+                    }
+                }
+
+                if ('object' === typeof event.originalEvent.clipboardData) {
+                    // 拼接&插入信息
+                    event.originalEvent.clipboardData.setData('text/html', '')
+                    container.remove();
+                    event.originalEvent.clipboardData.setData('text/plain','')
+                    event.preventDefault();
+                    return
+                }
+
+                $('body').append('<div id="symFixCopy" style="position: fixed; left: -9999px;">' +
+                    selectionObj.toString() + genCopy(author, link).join('<br>') + '</div>')
+                window.getSelection().selectAllChildren($('#symFixCopy')[0])
+                setTimeout(function () {
+                    $('#symFixCopy').remove()
+                }, 200)
+            })
+        }
+
+        addCopyfalse()
+    </script>
+</body>
+
+</html>

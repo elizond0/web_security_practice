@@ -55,6 +55,10 @@ setTimeout(function(){while (true) {eval("debugger")}},1000)
 
 ## 3. [粘贴板信息jacking](https://github.com/dxa4481/Pastejacking)
 
+* 兼容性IE9+，使用window.selection和event.originalEvent.clipboardData接口修改复制的文本，或屏蔽复制功能
+
+* @/demo/3-clipboard jacking.html
+
 ## 4. [弹窗jacking](https://github.com/dxa4481/windowHijacking)
 
 ## 5. [XSSJacking](https://github.com/dxa4481/XSSJacking)
