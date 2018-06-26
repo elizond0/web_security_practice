@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>函数重定义</h1>
+    <script>
+        // 1.函数重定义
+        // @1 这是一种最基本也是最常用的代码反调试技术了，修改它原本的功能，并隐藏特定信息或显示伪造的信息。
+        // console.log("HelloWorld");
+        // var fake = function () {};
+        // window['console']['log'] = fake;
+        // console.log("Youcan't see me!");// 不会被打印
+
+        // @2 也可以让它显示伪造的信息
+        // console.log("Normalfunction");
+        // // 首先关联初始console.log函数
+        // var original = window['console']['log'];
+        // // 判断参数如果等于fake，则打印伪造的信息
+        // var fake = function(argument) {
+        //     if (argument === "fake") {
+        //         original("fake info!");
+        //     } else {
+        //         original(argument);
+        //     }
+        // }
+        // window['console']['log']= fake;
+        // console.log("fake1");//fake1
+        // console.log("fake");//fake info!
+        // console.log("fake!");//fake!
+
+        // @3 实际上，为了控制代码的执行方式，还可以基于上述代码来构建一个代码段，并重定义eval函数。
+        // 把JavaScript代码传递给eval函数，接下来代码将会被计算并执行。
+        eval("console.log('1337')");
+        var original = eval;
+        var fake = function(argument) {
+            // 代码是否包含关键字 forbidden
+            if (argument.indexOf("forbidden") !==-1) {
+                original("console.log('NOOOOOO')");
+            }else {
+                original(argument);
+            }
+        }
+        eval= fake;
+        eval("console.log('see this...')");//see this...
+        eval("console.log('forbidden')");//NOOOOOO
+
+    </script>
+</body>
+
+</html>

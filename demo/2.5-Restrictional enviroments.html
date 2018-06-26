@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>限制执行环境</h1>
+    <script>
+        // 确认代码在浏览器中执行，而不是模拟器和nodejs
+        // 资源服务器地址，而不是localhost本地服务器
+        if (location.hostname === "localhost" || location.hostname === "127.0.0.1" || location.hostname === "") {
+            console.log("Don't run me here!")
+        }
+
+        // window对象是浏览器独有的，global对象是nodejs的
+        try {
+            console.log(window);
+        } catch (e) {
+            console.log("NodeJS detected!!!!");
+        }
+    </script>
+</body>
+
+</html>

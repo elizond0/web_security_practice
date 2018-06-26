@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>代理对象</h1>
+    <script>
+        // 创建一个代理对象并跟踪每一次document.createElemen调用，然后在控制台中记录下相关参数和信息
+        const handler = { // 创建句柄函数
+            apply: function (target, thisArg, args) {
+                console.log("拦截到调用创建元素方法createElement，参数为: " + args);
+                // 也可以在此处拦截其他代码
+                return target.apply(thisArg, args)
+            }
+        }
+        document.createElement = new Proxy(document.createElement, handler) // 创建代理函数，插入句柄
+        document.createElement('div');
+    </script>
+</body>
+
+</html>
