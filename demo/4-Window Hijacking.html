@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>弹窗jacking</h1>
+    <button onclick="windowHijack()">Open Window!</button>
+    <script>
+        // window.open打开的页面有权修改opener.location，而且打开后的页面可以通过定时器进行二次修改
+        // 打开网之后，再重定向该网页，具有安全隐患
+        // 例如：先跳转到淘宝，然后一定时间后location修改成高仿钓鱼网站，然后通过记录账号密码或者结合剪切板进行盗取
+        var windowHijack = function () {
+            window.open('https://legitloginpage.xyz', 'test');
+            setTimeout(function () {
+                window.open('https://notlegitloginpage.xyz', 'test');
+            }, 10000);
+        }
+    </script>
+    
+</body>
+
+</html>

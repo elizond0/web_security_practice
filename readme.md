@@ -57,8 +57,16 @@ setTimeout(function(){while (true) {eval("debugger")}},1000)
 
 * 兼容性IE9+，使用window.selection和event.originalEvent.clipboardData接口修改复制的文本，或屏蔽复制功能
 
+* 可用于网络钓鱼攻击，例如在浏览器显示正常的代码，但是复制的时候进行部分篡改，以执行危险脚本造成损失，尤其是复制到终端执行时
+
 * @/demo/3-clipboard jacking.html
 
 ## 4. [弹窗jacking](https://github.com/dxa4481/windowHijacking)
+
+* window.open打开的页面有权修改opener.location，打开网之后，再重定向该网页，具有安全隐患，而且打开后的页面可以通过定时器进行二次修改
+
+* 例如：先跳转到淘宝，然后一定时间后location修改成高仿钓鱼网站，然后通过记录账号密码或者结合剪切板进行盗取
+
+* @/demo/4-Window Hijacking.html
 
 ## 5. [XSSJacking](https://github.com/dxa4481/XSSJacking)
