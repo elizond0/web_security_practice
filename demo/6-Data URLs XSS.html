@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+</head>
+
+<body>
+  <a href="data:text/html,<script>alert('hi');</script>">通过A标签使用Data URLs</a>
+  <br />
+  <a href="javascript:test()">通过iframe执行</a>
+  <br />
+  <a href='javascript:var string = "data:text/html,&lt;script>alert(1);console.log(11111111111)&lt;/script>";var iframe="&lt;iframe width=&apos;100%&apos; height=&apos;100%&apos; src=&apos;" + string + "&apos;>&lt;/iframe>";var x=window.open();x.document.open();
+    x.document.write(iframe); x.document.close();'>单行代码：通过iframe执行js</a>
+  <br />
+  <img src="data:text/html,<script>alert('hi');</script>" width="400px" height='300px' style="background-color:aqua" />
+  <br />
+  <script>
+    function test() {
+      var string = "data:text/html,<script>alert('hi');console.log('11111111111')<" + "/script>";
+      var iframe = "<iframe width='100%' height='100%' src='" + string + "'></iframe>"
+      var x = window.open();
+      x.document.open();
+      x.document.write(iframe);
+      x.document.close();
+    }
+  </script>
+</body>
+
+</html>
